@@ -8,6 +8,7 @@ import LandingPage from "./routes/LandingPage/LandingPage";
 import { LoginPage } from "./routes/LoginPage/LoginPage";
 import { AuthProvider } from "./contexts/AuthContext";
 import { ToastProvider } from "./contexts/ToastContext";
+import { SignUpPage } from "./routes/SignupPage/SignupPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -19,6 +20,7 @@ root.render(
             <Route path="/" element={<App />}>
               <Route path="/" element={<LandingPage />} />
               <Route path="/login" element={<LoginPage />} />
+              <Route path="/signup" element={<SignUpPage/>} />
             </Route>
           </Routes>
         </AuthProvider>
