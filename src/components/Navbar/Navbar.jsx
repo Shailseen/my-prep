@@ -1,6 +1,7 @@
 import * as React from "react";
 import styles from "./Navbar.module.css";
 import Button from "@mui/material/Button";
+import { Link } from "react-router-dom";
 export default function Navbar() {
   return (
     <div className={styles.navbar_wrapper}>
@@ -10,7 +11,9 @@ export default function Navbar() {
         </h1>
       </div>
       <div className={styles.button_wrapper}>
-        <Button variant="contained">Log In</Button>
+        <Link to="/login" style={{textDecoration: "none"}}>
+          <Button variant="contained">Log In</Button>
+        </Link>
       </div>
     </div>
   );
