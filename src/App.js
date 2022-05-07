@@ -5,6 +5,7 @@ import styles from "./App.module.css";
 import Navbar from "./components/Navbar/Navbar";
 
 import { initializeApp } from "firebase/app";
+import 'firebase/firestore';
 
 
 const firebaseConfig = {

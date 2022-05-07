@@ -9,6 +9,7 @@ import {
 import { initializeApp } from "firebase/app";
 import { useToast } from "./ToastContext";
 import { useNavigate } from "react-router-dom";
+import 'firebase/firestore';
 
 const firebaseConfig = {
   apiKey: "AIzaSyB_buVcpv0maTgwt7MDjHM6ux0BFIUUg24",
