@@ -6,6 +6,7 @@ import Navbar from "./components/Navbar/Navbar";
 
 import { initializeApp } from "firebase/app";
 
+
 const firebaseConfig = {
   apiKey: "AIzaSyB_buVcpv0maTgwt7MDjHM6ux0BFIUUg24",
   authDomain: "neogqod.firebaseapp.com",
