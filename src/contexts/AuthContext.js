@@ -7,6 +7,8 @@ import {
 } from "firebase/auth";
 
 import { initializeApp } from "firebase/app";
+import { useToast } from "./ToastContext";
+import { useNavigate } from "react-router-dom";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB_buVcpv0maTgwt7MDjHM6ux0BFIUUg24",
@@ -27,6 +29,8 @@ export function useAuth() {
 }
 
 export function AuthProvider({ children }) {
+    const {callToast} = useToast();
+    const navigate = useNavigate()
   const [currentUser, setCurrentUser] = useState();
 
   function login(email, password) {
@@ -34,16 +38,19 @@ export function AuthProvider({ children }) {
       .then((userCredential) => {
         const user = userCredential.user;
         setCurrentUser(user);
+        callToast("Login Successfully");
       })
       .catch((error) => {
         const errorCode = error.code;
         const errorMessage = error.message;
+        callToast(errorMessage)
       });
   }
 
   function logout() {
     signOut(auth)
       .then(() => {
+        callToast("Logout successfully!!");
         navigate("/");
       })
       .catch((error) => {
