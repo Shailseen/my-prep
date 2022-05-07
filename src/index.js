@@ -5,16 +5,24 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LandingPage from "./routes/LandingPage/LandingPage";
+import { LoginPage } from "./routes/LoginPage/LoginPage";
+import { AuthProvider } from "./contexts/AuthContext";
+import { ToastProvider } from "./contexts/ToastContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route path="/" element={<LandingPage />} />
-        </Route>
-      </Routes>
+      <ToastProvider>
+        <AuthProvider>
+          <Routes>
+            <Route path="/" element={<App />}>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/login" element={<LoginPage />} />
+            </Route>
+          </Routes>
+        </AuthProvider>
+      </ToastProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

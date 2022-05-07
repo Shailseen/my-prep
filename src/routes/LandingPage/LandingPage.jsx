@@ -5,6 +5,7 @@ import codeSvg from "../../assets/code.svg";
 import { Button } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
+import { Link } from "react-router-dom";
 
 export default function LandingPage() {
   const theme = createTheme({
@@ -39,17 +40,20 @@ export default function LandingPage() {
       />
       <div className={styles.description_wrapper}>
         <p>
-        Programming isn't about what you know, it's about what you can figure out
+          Programming isn't about what you know, it's about what you can figure
+          out
         </p>
         <div className={styles.button_wrapper}>
-          <Button
-            color="primary"
-            variant="contained"
-            size="large"
-            sx={{ width: "15rem" }}
-          >
-            LOG IN
-          </Button>
+          <Link to="/login" className="link">
+            <Button
+              color="primary"
+              variant="contained"
+              size="large"
+              sx={{ width: "15rem" }}
+            >
+              LOG IN
+            </Button>
+          </Link>
           <ThemeProvider theme={theme}>
             <Button
               color="secondary"
