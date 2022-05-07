@@ -1,0 +1,49 @@
+.header {
+    font-size: 4rem;
+    font-weight: bolder;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    width: fit-content;
+  }
+  
+  .text_transparent {
+    color: transparent;
+  }
+  
+  .to_blue {
+    --tw-gradient-to: #0070f3;
+  }
+  
+  .from_pink {
+    --tw-gradient-from: #ec008c;
+    --tw-gradient-stops: var(--tw-gradient-from),
+      var(--tw-gradient-to, rgba(236, 0, 140, 0));
+  }
+  
+  .bg_gradient_to_r {
+    background-image: linear-gradient(90deg, var(--tw-gradient-stops));
+  }
+  
+  .bg_clip_text {
+    --webkit-background-clip: text;
+    background-clip: text;
+  }
+  
+  .description_wrapper {
+    margin: 0rem 1rem;
+  }
+  
+  .button_wrapper {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  
+  .description_wrapper > p {
+      color: grey;
+      text-align: center;
+      font-size: larger;
+  }

@@ -1,0 +1,21 @@
+.navbar_wrapper{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.header_wrapper {
+    display: flex;
+    align-items: center;
+    padding-left: 1.5rem;
+}
+.header_wrapper > h1 {
+    color: var(--primary-color);
+}
+.header_wrapper > h1 > span {
+    color: black;
+}
+.button_wrapper {
+    display: flex;
+    align-items: center;
+    padding-right: 1rem;
+}
