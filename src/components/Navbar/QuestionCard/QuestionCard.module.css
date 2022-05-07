@@ -1,0 +1,23 @@
+.card_container {
+    margin: 1rem 1rem;
+}
+.card {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid grey;
+}
+.chips_wrapper {
+    display: flex;
+    gap: 0.5rem;
+}
+.question_wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
