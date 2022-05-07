@@ -44,7 +44,7 @@ export default function LandingPage() {
           out
         </p>
         <div className={styles.button_wrapper}>
-          <Link to="/login" style={{textDecoration: "none"}}>
+          <Link to="/login" className="link">
             <Button
               color="primary"
               variant="contained"

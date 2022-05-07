@@ -10,8 +10,10 @@ import { Link } from "react-router-dom";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 import { useState } from "react";
+import { useAuth } from "../../contexts/AuthContext";
 
 export const LoginPage = () => {
+    const {login} = useAuth()
     const [inputLogin, setInputLogin] = useState({ email: "", password: "" });
     const passwordHandler = (e) => {
       setInputLogin({ ...inputLogin, password: e.target.value });
@@ -67,6 +69,7 @@ export const LoginPage = () => {
           variant="contained"
           style={btnstyle}
           fullWidth
+          onClick={() => login(inputLogin.email,inputLogin.password)}
         >
           Log in
         </Button>
@@ -76,6 +79,7 @@ export const LoginPage = () => {
           variant="contained"
           style={btnstyle}
           fullWidth
+          onClick={() => login("test@gmail.com","test12345")}
         >
           Log in as Guest credential
         </Button>
