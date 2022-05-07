@@ -6,8 +6,10 @@ import { Button } from "@mui/material";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
 import { Link } from "react-router-dom";
+import { useAuth } from "../../contexts/AuthContext";
 
 export default function LandingPage() {
+  const { currentUser } = useAuth();
   const theme = createTheme({
     palette: {
       secondary: {
@@ -44,16 +46,18 @@ export default function LandingPage() {
           out
         </p>
         <div className={styles.button_wrapper}>
-          <Link to="/login" className="link">
-            <Button
-              color="primary"
-              variant="contained"
-              size="large"
-              sx={{ width: "15rem" }}
-            >
-              LOG IN
-            </Button>
-          </Link>
+          {!currentUser && (
+            <Link to="/login" className="link">
+              <Button
+                color="primary"
+                variant="contained"
+                size="large"
+                sx={{ width: "15rem" }}
+              >
+                LOG IN
+              </Button>
+            </Link>
+          )}
           <ThemeProvider theme={theme}>
             <Button
               color="secondary"

@@ -85,7 +85,7 @@ export const LoginPage = () => {
         </Button>
         <Typography style={txtStyle}>
           Need an account?
-          <Link to="/" style={linkStyle}>
+          <Link to="/signup" style={linkStyle}>
             {" "}
             SIGN UP
           </Link>
