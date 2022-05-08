@@ -1,0 +1,4 @@
+.questions_container {
+    display: flex;
+    flex-direction: column;
+}
