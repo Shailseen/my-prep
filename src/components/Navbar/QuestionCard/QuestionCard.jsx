@@ -7,7 +7,10 @@ import { Button } from "@mui/material";
 import { Chip } from "@mui/material";
 import styles from "./QuestionCard.module.css";
 
-export const QuestionCard = () => {
+export const QuestionCard = ({items}) => {
+  const {question,tag,related} = items;
+  const relatedTopic = JSON.parse(related);
+  const title = question.length > 50 ? question.substring(0,49).concat("...") : question 
   return (
     <>
       <Box className={styles.card_container} sx={{ minWidth: 275 }}>
@@ -17,7 +20,7 @@ export const QuestionCard = () => {
               <Typography className={styles.question_wrapper} component="div">
                 <Typography component="div">
                   <Typography variant="h5" component="div">
-                    No. Question Name
+                    {title}
                   </Typography>
                   <Typography
                     style={{ fontSize: "small", color: "grey" }}
@@ -38,27 +41,21 @@ export const QuestionCard = () => {
                 </Typography>
               </Typography>
               <Button variant="outlined" sx={{ width: "9rem" }} size="medium">
-                Let's Do It
+                SOLVE NOW
               </Button>
               <Typography className={styles.wrapper} component="div">
                 <Typography className={styles.chips_wrapper} component="div">
-                  <Chip
+                  {relatedTopic.map((item,index) => <Chip
                     sx={{
                       backgroundColor: "var(--primary-color)",
                       color: "white",
                     }}
-                    label="Array"
-                  />
-                  <Chip
-                    sx={{
-                      backgroundColor: "var(--primary-color)",
-                      color: "white",
-                    }}
-                    label="String"
-                  />
+                    label={item}
+                    key={index}
+                  />)}
                 </Typography>
                 <Typography component="div">
-                  <Button variant="text">Text</Button>
+                  {tag==="Easy" ? <Button sx={{color: "green"}} variant="text">Easy</Button> : tag==="Medium" ? <Button sx={{color: "orange"}} variant="text">Medium</Button> : <Button sx={{color: "Hard"}} variant="text">Hard</Button>}
                 </Typography>
               </Typography>
             </CardContent>

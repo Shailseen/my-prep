@@ -59,6 +59,7 @@ export default function LandingPage() {
             </Link>
           )}
           <ThemeProvider theme={theme}>
+            <Link to="/questions" className="link">
             <Button
               color="secondary"
               variant="contained"
@@ -67,6 +68,7 @@ export default function LandingPage() {
             >
               GET STARTED
             </Button>
+            </Link>
           </ThemeProvider>
         </div>
       </div>
