@@ -9,7 +9,7 @@ export const Questions = () => {
     <div className={styles.questions_container}>
       {data && data.map((items,index) => {
         return (
-            <QuestionCard key={index} items={items} />
+            <QuestionCard key={items.questionId} items={items} />
         );
       })}
     </div>
