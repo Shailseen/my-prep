@@ -1,0 +1,59 @@
+.card_container {
+  margin: 1rem;
+}
+
+.first {
+  background-color: #ffd700;
+}
+.second {
+  background-color: #c0c0c0;
+}
+.third {
+  background-color: #cd7f32;
+}
+.none {
+  background-color: white;
+}
+.card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.score {
+  font-weight: bolder;
+  padding: 0.5rem;
+  background-color: white;
+  border-radius: 50%;
+  font-size: 1.5rem;
+}
+
+.score1 {
+  font-weight: bolder;
+  padding: 10px;
+  color: white;
+  background-color: black;
+  border-radius: 100%;
+  font-size: 1.5rem;
+}
+
+.name {
+  font-weight: bolder;
+  font-size: 1.5rem;
+}
+
+.top {
+  font-size: 2rem;
+  color: transparent;
+  background-image: linear-gradient(to right, var(--primary-color), white);
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-size: 200%;
+  background-position: -200%;
+  animation: animated-gradient 2s infinite alternate-reverse;
+}
+@keyframes animated-gradient {
+  to {
+    background-position: 200%;
+  }
+}

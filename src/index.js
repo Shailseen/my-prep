@@ -12,10 +12,12 @@ import { SignUpPage } from "./routes/SignupPage/SignupPage";
 import { Questions } from "./routes/Questions/Questions";
 import { QuestionProvider } from "./contexts/QuestionContext";
 import { EditorPage } from "./routes/EditorPage/EditorPage";
+import { Submissions } from "./routes/Submissions/Submissons";
+import { LeaderBoardPage } from "./routes/LeaderBoardPage/LeaderBoardPage";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
+  // <React.StrictMode>
     <BrowserRouter>
       <ToastProvider>
         <AuthProvider>
@@ -27,13 +29,15 @@ root.render(
                 <Route path="/signup" element={<SignUpPage />} />
                 <Route path="/questions" element={<Questions />} />
                 <Route path="/editor/:questionId" element={<EditorPage />} />
+                <Route path="/submissions" element={<Submissions />} />
+                <Route path="/leaderboard" element={<LeaderBoardPage />} />
               </Route>
             </Routes>
           </QuestionProvider>
         </AuthProvider>
       </ToastProvider>
     </BrowserRouter>
-  </React.StrictMode>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

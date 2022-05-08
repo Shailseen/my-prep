@@ -66,6 +66,7 @@ export const EditorPage = () => {
     signature,
     tcDatatype,
     answerDatatype,
+    title,
   } = data !== undefined && questionDetail;
 
   var parseTestcase = testCaseArr.map((it) => JSON.parse(it));
@@ -78,6 +79,31 @@ export const EditorPage = () => {
     setCode(signature);
   }, [data]);
   const navigate = useNavigate();
+
+  const [compileMsg, setCompileMsg] = useState({status: "",statement: ""});
+
+  const compileHandler = () => {
+    let userCode = "";
+    userCode += "const num = tc;";
+    userCode += code;
+    let temp = code.split(" ")[1];
+    userCode += temp + "(num);";
+    let tc = parseTestcase[0];
+    var userAns = eval(userCode);
+    if (JSON.stringify(userAns) !== JSON.stringify(parseAnswerArray[0])) {
+        setCompileMsg((prev) => ({
+            ...prev,
+            status: false,
+            statement: "Sample Testcase failed !!",
+          }));
+    } else {
+        setCompileMsg((prev) => ({
+            ...prev,
+            status: true,
+            statement: "Sample Testcase pass !!",
+          }));
+    }
+  };
 
   const clickHandler = () => {
     !currentUser && navigate("/login");
@@ -96,7 +122,6 @@ export const EditorPage = () => {
     for (i = 0; i < parseTestcase.length; i++) {
       let tc = parseTestcase[i];
       var userAns = eval(userCode);
-      console.log(userAns);
       if (JSON.stringify(userAns) !== JSON.stringify(parseAnswerArray[i])) {
         p = true;
         setTimeout(() => {
@@ -124,6 +149,8 @@ export const EditorPage = () => {
       codeText: code,
       score: i,
       user: currentUser.uid,
+      title: title,
+      date: Timestamp.fromDate(new Date()),
     };
     (async function() {
       await addDoc(collection(firestore, "submissions"), docData)
@@ -135,7 +162,6 @@ export const EditorPage = () => {
         });
     })();
 
-    
     const docRef = doc(firestore, "users", `${currentUser.uid}`);
     async function check() {
       const docSnap = await getDoc(docRef);
@@ -177,8 +203,12 @@ export const EditorPage = () => {
   };
   return (
     <div className={styles.pageContainer}>
-      <Typography sx={{ textAlign: "center" }} component="h3" variant="div">
-        Question Name
+      <Typography
+        sx={{ textAlign: "center", padding: "1rem" }}
+        component="h2"
+        variant="div"
+      >
+        {title}
       </Typography>
       <Typography className={styles.question_container} variant="div">
         <Typography sx={{ marginTop: "0.5rem" }} variant="div">
@@ -226,7 +256,7 @@ export const EditorPage = () => {
         <div className={styles.submitButtoncontainer}>
           <LoadingButton
             loading={isLoading}
-            size="small"
+            size="medium"
             variant="contained"
             startIcon={<SendIcon />}
             onClick={() => clickHandler()}
@@ -238,7 +268,10 @@ export const EditorPage = () => {
             size="medium"
             variant="outlined"
             startIcon={<PlayArrowIcon />}
-          ></Button>
+            onClick={() => compileHandler()}
+          >
+            Compile
+          </Button>
         </div>
       </div>
 
@@ -249,6 +282,16 @@ export const EditorPage = () => {
       ) : (
         <Typography sx={{ color: "red" }}>
           {isTestcasePass.statement}
+        </Typography>
+      )}
+
+      {compileMsg.status ? (
+        <Typography sx={{ color: "green" }}>
+          {compileMsg.statement}
+        </Typography>
+      ) : (
+        <Typography sx={{ color: "red" }}>
+          {compileMsg.statement}
         </Typography>
       )}
     </div>

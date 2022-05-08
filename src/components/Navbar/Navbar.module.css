@@ -2,6 +2,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 .header_wrapper {
     display: flex;
@@ -23,4 +24,15 @@
 .user_name{
     font-weight: bold;
     font-size: large;
+}
+.linkContainer{
+    display: flex;
+    gap: 1rem;
+}
+
+@media only screen and (max-width: 500px) {
+    .linkContainer{
+        margin: 0rem auto;
+        order: 100;
+    }
 }

@@ -1,0 +1,16 @@
+.card_container{
+    margin: 1rem;
+}
+.allCorrect {
+    color: green;
+    /* background-color: rgba(8, 131, 8, 0.268); */
+}
+.wrong {
+    color: red;
+    background-color: rgba(255, 0, 0, 0.312);
+}
+.card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

@@ -31,9 +31,9 @@ export default function LandingPage() {
           )}
         >
           {" "}
-          architect{" "}
+          solve{" "} 
         </span>
-        code
+        problems
       </div>
       <img
         style={{ margin: "0rem auto", width: "100%", height: "20rem" }}
