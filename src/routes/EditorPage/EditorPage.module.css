@@ -1,0 +1,23 @@
+.question_container {
+    display: flex;
+    flex-direction: column;
+}
+.example_testcase_container {
+    display: flex;
+    flex-direction: column;
+    margin-top: 1rem;
+}
+.pageContainer {
+    margin: 1rem;
+}
+.buttonContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.submitButtoncontainer {
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    gap: 1rem;
+}

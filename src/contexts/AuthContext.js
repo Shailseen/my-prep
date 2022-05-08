@@ -68,6 +68,7 @@ export function AuthProvider({ children }) {
         const user = userCredential.user;
         setCurrentUser(user);
         callToast("Login Successfully");
+        navigate("/questions")
       })
       .catch((error) => {
         const errorCode = error.code;

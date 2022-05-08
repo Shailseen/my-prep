@@ -29,7 +29,7 @@ const QuestionProvider = ({ children }) => {
       const querySnapshot = await getDocs(collection(firestore, "questions"));
       const temp = [];
       querySnapshot.forEach((doc) => {
-        temp.push(doc.data());
+        temp.push({questionDetail: doc.data(),questionId: doc.id});
       });
       setData(temp);
     })();
