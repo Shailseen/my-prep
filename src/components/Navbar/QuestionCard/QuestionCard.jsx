@@ -10,10 +10,9 @@ import { NavLink } from "react-router-dom";
 
 export const QuestionCard = ({ items }) => {
   const { questionDetail, questionId } = items;
-  const { question, tag, related } = questionDetail;
+  const { question, tag, related, title } = questionDetail;
   const relatedTopic = JSON.parse(related);
-  const title =
-    question.length > 50 ? question.substring(0, 49).concat("...") : question;
+  
   return (
     <>
       <Box className={styles.card_container} sx={{ minWidth: 275 }}>
@@ -26,10 +25,10 @@ export const QuestionCard = ({ items }) => {
                     {title}
                   </Typography>
                   <Typography
-                    style={{ fontSize: "small", color: "grey" }}
+                    style={{ fontSize: "large", color: "grey" }}
                     component="p"
                   >
-                    Some text like votes
+                    {question}
                   </Typography>
                 </Typography>
                 <Typography

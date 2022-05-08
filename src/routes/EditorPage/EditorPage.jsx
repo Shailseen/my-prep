@@ -22,7 +22,12 @@ import {
   Timestamp,
   addDoc,
   collection,
+  getDocs,
+  getDoc,
 } from "firebase/firestore";
+import { useTabContext } from "@mui/base";
+import { useToast } from "../../contexts/ToastContext";
+import { async } from "@firebase/util";
 
 const firebaseConfig = {
   apiKey: "AIzaSyB_buVcpv0maTgwt7MDjHM6ux0BFIUUg24",
@@ -37,6 +42,7 @@ const app = initializeApp(firebaseConfig);
 const firestore = getFirestore();
 
 export const EditorPage = () => {
+  const { callToast } = useToast();
   const [code, setCode] = useState("");
   const { currentUser } = useAuth();
   const { questionId } = useParams();
@@ -65,14 +71,13 @@ export const EditorPage = () => {
   var parseTestcase = testCaseArr.map((it) => JSON.parse(it));
   var parseAnswerArray = answerArr.map((it) => JSON.parse(it));
 
-  console.log(parseTestcase, parseAnswerArray);
+  //   console.log(parseTestcase, parseAnswerArray);
   const testCase = data !== undefined && parseTestcase[0].toString();
   const answerTestcase = data !== undefined && parseAnswerArray[0].toString();
   useEffect(() => {
     setCode(signature);
   }, [data]);
   const navigate = useNavigate();
-
 
   const clickHandler = () => {
     !currentUser && navigate("/login");
@@ -86,8 +91,9 @@ export const EditorPage = () => {
     let temp = code.split(" ")[1];
     userCode += temp + "(num);";
     // setCode(userCode);
-    let p = false;
-    for (let i = 0; i < parseTestcase.length; i++) {
+    let p = false,
+      i;
+    for (i = 0; i < parseTestcase.length; i++) {
       let tc = parseTestcase[i];
       var userAns = eval(userCode);
       console.log(userAns);
@@ -112,7 +118,63 @@ export const EditorPage = () => {
         }));
       }, 1000);
     }
-  }
+
+    console.log(currentUser);
+    const docData = {
+      codeText: code,
+      score: i,
+      user: currentUser.uid,
+    };
+    (async function() {
+      await addDoc(collection(firestore, "submissions"), docData)
+        .then(() => {
+          callToast("Submitted succesfully");
+        })
+        .catch((error) => {
+          callToast(error);
+        });
+    })();
+
+    
+    const docRef = doc(firestore, "users", `${currentUser.uid}`);
+    async function check() {
+      const docSnap = await getDoc(docRef);
+      // console.log(docSnap)
+      if (docSnap.exists()) {
+        // console.log(docSnap.data())
+        let solved = docSnap.data();
+        let solvedQuestions = solved.solvedQuestions;
+        console.log(solvedQuestions);
+        let index = solvedQuestions.findIndex(
+          (it) => it.questionId === questionId
+        );
+        if (index === -1) {
+          solvedQuestions.push({ questionId: questionId, score: i });
+        } else if (i > solvedQuestions[index].score) {
+          solvedQuestions[index].score = i;
+        }
+
+        async function update() {
+          await setDoc(doc(firestore, "users", `${currentUser.uid}`), solved);
+        }
+        update();
+        console.log(index);
+      } else {
+        async function update() {
+          await setDoc(doc(firestore, "users", `${currentUser.uid}`), {
+            name: currentUser.displayName,
+            solvedQuestions: [{ questionId: questionId, score: i }],
+          });
+        }
+        update();
+      }
+    }
+    check();
+
+    // console.log(querySnapshot);
+    //   const q = query(querySnapshot, where("solvedQuestions" ));
+    //   console.log(doc.id, " => ", doc.data());
+  };
   return (
     <div className={styles.pageContainer}>
       <Typography sx={{ textAlign: "center" }} component="h3" variant="div">
