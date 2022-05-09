@@ -5,15 +5,18 @@ import {
     TextField,
     Button,
     Typography,
-    Link,
   } from "@mui/material";
   import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
   import { useState } from "react";
   import { useAuth } from "../../contexts/AuthContext";
-  
+  import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
   
   export const SignUpPage = () => {
+    useEffect(() => {
+      document.title = "NEOFORCES | SIGNUP";
+    },[])
     const { signup, currentUser } = useAuth();
     const [inputLogin, setInputLogin] = useState({
       email: "",
@@ -101,7 +104,7 @@ import {
             Sign up
           </Button>
           <Typography>
-            Already have an account?<Link to="/login" className="link"> Sign In</Link>
+            Already have an account?<Link to="/login" className="link"> SIGN IN</Link>
           </Typography>
         </Paper>
       </Grid>

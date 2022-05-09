@@ -42,6 +42,9 @@ const app = initializeApp(firebaseConfig);
 const firestore = getFirestore();
 
 export const EditorPage = () => {
+    useEffect(() => {
+        document.title = "NEOFORCES | PROBLEM";
+    })
   const { callToast } = useToast();
   const [code, setCode] = useState("");
   const { currentUser } = useAuth();
@@ -270,7 +273,7 @@ export const EditorPage = () => {
             startIcon={<PlayArrowIcon />}
             onClick={() => compileHandler()}
           >
-            Compile
+            Run code
           </Button>
         </div>
       </div>

@@ -7,8 +7,12 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { grey } from "@mui/material/colors";
 import { Link } from "react-router-dom";
 import { useAuth } from "../../contexts/AuthContext";
+import { useEffect } from "react";
 
 export default function LandingPage() {
+  useEffect(() => {
+    document.title = "NEOFORCES";
+  })
   const { currentUser } = useAuth();
   const theme = createTheme({
     palette: {

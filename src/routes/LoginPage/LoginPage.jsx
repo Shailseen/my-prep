@@ -11,8 +11,12 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 
 import { useState } from "react";
 import { useAuth } from "../../contexts/AuthContext";
+import { useEffect } from "react";
 
 export const LoginPage = () => {
+  useEffect(() => {
+    document.title = "NEOFORCES | LOGIN";
+  })
     const {login} = useAuth()
     const [inputLogin, setInputLogin] = useState({ email: "", password: "" });
     const passwordHandler = (e) => {

@@ -37,16 +37,17 @@ const app = initializeApp(firebaseConfig);
 const firestore = getFirestore();
 
 export const LeaderBoardPage = () => {
+  useEffect(() => {
+    document.title = "NEOFORCES | LEADERBOARD";
+  });
   const [users, setUsers] = useState([]);
   useEffect(() => {
     const q = query(collection(firestore, "users"));
-    console.log(q);
     async function abs() {
       const temp = [];
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         temp.push(doc.data());
-        console.log(doc.id, " => ", doc.data());
       });
       const compare = (a, b) => {
         let scoreA = 0;
@@ -62,11 +63,9 @@ export const LeaderBoardPage = () => {
       };
       temp.sort((a, b) => compare(a, b));
       temp.forEach((it, index) => (temp[index].score = sum(it)));
-      console.log(temp);
       setUsers(temp);
     }
     abs();
-    console.log(users);
   }, []);
 
   return (
@@ -74,6 +73,7 @@ export const LeaderBoardPage = () => {
       {users.map((item, i) => {
         return (
           <Box
+          key={i}
             className={ClassNames(styles.card_container)}
             sx={{ minWidth: 275 }}
           >
@@ -84,23 +84,34 @@ export const LeaderBoardPage = () => {
                   ? styles.first
                   : i === 1
                   ? styles.second
-                  : i === 2
-                  && styles.third
+                  : i === 2 && styles.third
               )}
             >
               <React.Fragment>
-                <CardContent  className={ClassNames(styles.card,
-                i === 0
-                  ? styles.first
-                  : i === 1
-                  ? styles.second
-                  : i === 2
-                  && styles.third
-              )}>
-                  <Typography className={ClassNames(styles.name, i===0 && styles.top)} variant="p" component="div">
-                    {item.name}
+                <CardContent
+                  className={ClassNames(
+                    styles.card,
+                    i === 0
+                      ? styles.first
+                      : i === 1
+                      ? styles.second
+                      : i === 2 && styles.third
+                  )}
+                >
+                  <Typography
+                    className={ClassNames(styles.name, i === 0 && styles.top)}
+                    variant="p"
+                    component="div"
+                  >
+                    {i+1}.{" "}{item.name}
                   </Typography>
-                  <Typography className={ClassNames(i <= 2 ? styles.score : styles.score1)} variant="p" component="div">
+                  <Typography
+                    className={ClassNames(
+                      i <= 2 ? styles.score : styles.score1
+                    )}
+                    variant="p"
+                    component="div"
+                  >
                     {item.score}
                   </Typography>
                 </CardContent>

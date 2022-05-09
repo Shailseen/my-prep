@@ -42,12 +42,12 @@ export const Submissions = () => {
   let temp = [];
 
   useEffect(() => {
+    document.title = "NEOFORCES | SUBMISSIONS";
     const q = query(
       collection(firestore, "submissions"),
       where("user", "==", currentUser.uid),
       orderBy("date", "desc")
     );
-    console.log(q);
     async function abs() {
       const temp = [];
       const querySnapshot = await getDocs(q);
@@ -58,14 +58,12 @@ export const Submissions = () => {
       setSubmission(temp);
     }
     abs();
-    console.log("jo");
   }, []);
-
   return (
     <>
       {submission.map((item, index) => {
+          console.log(item.date.toDate().toString().substring(0,25))
         return (
-          //  <h1>{item.title}</h1>
 
           <Box className={styles.card_container} sx={{ minWidth: 275 }}>
             <Card variant="outlined">
@@ -77,11 +75,12 @@ export const Submissions = () => {
                 >
                   <div>
                     <Typography variant="h6" component="div">
-                      {item.title}
+                      {index+1}.{" "}{item.title}
                     </Typography>
                     <Typography variant="p" component="div">
                       Score: {item.score}/10
                     </Typography>
+                    <small style={{color: "black",fontWeight: "bolder"}}>{item.date.toDate().toString().substring(0,25)}</small>
                   </div>
                   <div>
                     {item.score === 10 && (
