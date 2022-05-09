@@ -85,7 +85,7 @@ export const LoginPage = () => {
           fullWidth
           onClick={() => login("test@gmail.com","test12345")}
         >
-          Log in as Guest credential
+          Log in as Guest
         </Button>
         <Typography style={txtStyle}>
           Need an account?
