@@ -42,9 +42,9 @@ const app = initializeApp(firebaseConfig);
 const firestore = getFirestore();
 
 export const EditorPage = () => {
-  useEffect(() => {
-    document.title = "NEOFORCES | PROBLEM";
-  });
+    useEffect(() => {
+        document.title = "NEOFORCES | PROBLEM";
+    })
   const { callToast } = useToast();
   const [code, setCode] = useState("");
   const { currentUser } = useAuth();
@@ -72,25 +72,21 @@ export const EditorPage = () => {
     title,
   } = data !== undefined && questionDetail;
 
-  var parseTestcase;
-  var parseAnswerArray;
-  var testCase;
-  var answerTestcase;
-  useEffect(() => {
-    if (data !== undefined) {
-      parseTestcase = testCaseArr.map((it) => JSON.parse(it));
-      parseAnswerArray = answerArr.map((it) => JSON.parse(it));
-      testCase = data !== undefined && parseTestcase[0].toString();
-      answerTestcase = data !== undefined && parseAnswerArray[0].toString();
-    }
-  }, [data]);
+  if(testCaseArr!==undefined){
+  var parseTestcase = testCaseArr.map((it) => JSON.parse(it));
+  }
+  if(answerArr!==undefined)
+  var parseAnswerArray = answerArr.map((it) => JSON.parse(it));
   
+  //   console.log(parseTestcase, parseAnswerArray);
+  const testCase = data !== undefined && parseTestcase[0].toString();
+  const answerTestcase = data !== undefined && parseAnswerArray[0].toString();
   useEffect(() => {
     setCode(signature);
   }, [data]);
   const navigate = useNavigate();
 
-  const [compileMsg, setCompileMsg] = useState({ status: "", statement: "" });
+  const [compileMsg, setCompileMsg] = useState({status: "",statement: ""});
 
   const compileHandler = () => {
     let userCode = "";
@@ -101,17 +97,17 @@ export const EditorPage = () => {
     let tc = parseTestcase[0];
     var userAns = eval(userCode);
     if (JSON.stringify(userAns) !== JSON.stringify(parseAnswerArray[0])) {
-      setCompileMsg((prev) => ({
-        ...prev,
-        status: false,
-        statement: "Sample Testcase failed !!",
-      }));
+        setCompileMsg((prev) => ({
+            ...prev,
+            status: false,
+            statement: "Sample Testcase failed !!",
+          }));
     } else {
-      setCompileMsg((prev) => ({
-        ...prev,
-        status: true,
-        statement: "Sample Testcase pass !!",
-      }));
+        setCompileMsg((prev) => ({
+            ...prev,
+            status: true,
+            statement: "Sample Testcase pass !!",
+          }));
     }
   };
 
@@ -296,9 +292,13 @@ export const EditorPage = () => {
       )}
 
       {compileMsg.status ? (
-        <Typography sx={{ color: "green" }}>{compileMsg.statement}</Typography>
+        <Typography sx={{ color: "green" }}>
+          {compileMsg.statement}
+        </Typography>
       ) : (
-        <Typography sx={{ color: "red" }}>{compileMsg.statement}</Typography>
+        <Typography sx={{ color: "red" }}>
+          {compileMsg.statement}
+        </Typography>
       )}
     </div>
   );
