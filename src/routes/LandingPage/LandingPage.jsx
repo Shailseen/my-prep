@@ -37,7 +37,7 @@ export default function LandingPage() {
           {" "}
           solve{" "} 
         </span>
-        problems
+        problems with us.
       </div>
       <img
         style={{ margin: "0rem auto", width: "100%", height: "20rem" }}

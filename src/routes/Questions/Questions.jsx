@@ -6,7 +6,7 @@ import { useEffect } from "react";
 
 export const Questions = () => {
   useEffect(() => {
-    document.title = "NEOFORCES | QUESTTIONS";
+    document.title = "NEOFORCES | QUESTIONS";
   })
   const {data} = useQuestion()
   return (
