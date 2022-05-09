@@ -43,6 +43,7 @@ export const Submissions = () => {
 
   useEffect(() => {
     document.title = "NEOFORCES | SUBMISSIONS";
+    if(currentUser!==undefined) {
     const q = query(
       collection(firestore, "submissions"),
       where("user", "==", currentUser.uid),
@@ -58,7 +59,8 @@ export const Submissions = () => {
       setSubmission(temp);
     }
     abs();
-  }, []);
+}
+  }, [currentUser]);
   return (
     <>
       {submission.map((item, index) => {
