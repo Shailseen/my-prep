@@ -1,10 +1,10 @@
 # About
-This web app was made using neoghack 2022 which occured from 7 may to 9 may.
+This web app was made during neogHack 2022 which occured from 7 may to 9 may 2022.
 
 The web is problem solving website where user can find and solve programming problems. The features of websites are
 - Login/Logout
 - Leaderboard
-- Submission list of each user
+- Submission history for each user
 - Code editor with syntax highlighting
 
 ## Technologies used
